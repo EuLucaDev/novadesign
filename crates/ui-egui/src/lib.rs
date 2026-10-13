@@ -2001,9 +2001,8 @@ mod import_warning_tests {
     #[test]
     fn complete_import_does_not_show_a_warning() {
         let mut app = app();
-        let result = app
-            .open_file("file.openBytes", json!({"name": "complete.idml", "base64": novadesign_engine::cmd::base64_encode(&idml(false))}))
-            .unwrap();
+        let result =
+            app.open_file("file.openBytes", json!({"name": "complete.idml", "base64": novadesign_engine::cmd::base64_encode(&idml(false))})).unwrap();
         assert_eq!(result["warnings"], json!([]));
         assert!(app.ui.dialog.is_none());
         assert!(app.ui.status.is_empty());

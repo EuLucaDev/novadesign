@@ -771,7 +771,10 @@ const TABLE: &[(&str, [&str; 5])] = &[
         "Apply Parent to Pages…",
         ["Apply Parent to Pages…", "Apply Parent to Pages…", "Apply Parent to Pages…", "Apply Parent to Pages…", "将主页应用于页面…"],
     ),
-    ("Nova Foods App Page…", ["Nova Foods App Page…", "Nova Foods App Page…", "Nova Foods App Page…", "Nova Foods App Page…", "Nova Foods 应用页面…"]),
+    (
+        "Nova Foods App Page…",
+        ["Nova Foods App Page…", "Nova Foods App Page…", "Nova Foods App Page…", "Nova Foods App Page…", "Nova Foods 应用页面…"],
+    ),
     ("Nova Foods Website…", ["Nova Foods Website…", "Nova Foods Website…", "Nova Foods Website…", "Nova Foods Website…", "Nova Foods 网站…"]),
     ("Attributes", ["Attributes", "Attributes", "Attributes", "Attributes", "属性"]),
     ("Bevel and Emboss", ["Bevel and Emboss", "Bevel and Emboss", "Bevel and Emboss", "Bevel and Emboss", "斜面和浮雕"]),
@@ -1050,13 +1053,7 @@ const TABLE: &[(&str, [&str; 5])] = &[
     ("Interface Color Theme", ["Interface Color Theme", "Interface Color Theme", "Interface Color Theme", "Interface Color Theme", "界面颜色主题"]),
     (
         "Get Nova Foods support…",
-        [
-            "Get Nova Foods support…",
-            "Get Nova Foods support…",
-            "Get Nova Foods support…",
-            "Get Nova Foods support…",
-            "加入 Nova Foods Suporte…",
-        ],
+        ["Get Nova Foods support…", "Get Nova Foods support…", "Get Nova Foods support…", "Get Nova Foods support…", "加入 Nova Foods Suporte…"],
     ),
     ("Last Object Below", ["Last Object Below", "Last Object Below", "Last Object Below", "Last Object Below", "下方最后一个对象"]),
     ("Library Contents", ["Library Contents", "Library Contents", "Library Contents", "Library Contents", "库内容"]),
@@ -1597,7 +1594,10 @@ const TABLE: &[(&str, [&str; 5])] = &[
     ("Keyboard Increments", ["Keyboard Increments", "Keyboard Increments", "Keyboard Increments", "Keyboard Increments", "键盘增量"]),
     ("Liquid guides", ["Liquid guides", "Liquid guides", "Liquid guides", "Liquid guides", "自适应参考线"]),
     ("Markers", ["Markers", "Markers", "Markers", "Markers", "标记"]),
-    ("More Nova Foods apps", ["More Nova Foods apps", "More Nova Foods apps", "More Nova Foods apps", "More Nova Foods apps", "更多 Nova Foods 应用"]),
+    (
+        "More Nova Foods apps",
+        ["More Nova Foods apps", "More Nova Foods apps", "More Nova Foods apps", "More Nova Foods apps", "更多 Nova Foods 应用"],
+    ),
     ("Nested Line Styles", ["Nested Line Styles", "Nested Line Styles", "Nested Line Styles", "Nested Line Styles", "嵌套行样式"]),
     ("Nested Styles", ["Nested Styles", "Nested Styles", "Nested Styles", "Nested Styles", "嵌套样式"]),
     (

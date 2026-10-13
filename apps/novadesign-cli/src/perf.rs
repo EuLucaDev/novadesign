@@ -533,11 +533,7 @@ fn header() -> (usize, bool) {
     let cores = std::thread::available_parallelism().map_or(1, |c| c.get());
     let load = load_average();
     let noisy = load.is_some_and(|l| l > cores as f64 * 0.75);
-    outln!(
-        "{cores} cores, load average {}, render threads {}",
-        load.map_or("?".into(), |l| format!("{l:.1}")),
-        novadesign_render::default_threads()
-    );
+    outln!("{cores} cores, load average {}, render threads {}", load.map_or("?".into(), |l| format!("{l:.1}")), novadesign_render::default_threads());
     if noisy {
         outln!("WARNING: the machine is busy (load average above ¾ of the cores); wall-clock timings below are not trustworthy.");
     }

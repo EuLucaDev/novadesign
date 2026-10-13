@@ -1,8 +1,8 @@
 //! The Tools panel (left): single or double column, tool groups with flyouts, fill/stroke proxy,
 //! screen mode buttons.
 
-use novadesign_tools::TOOL_GROUPS;
 use egui::{Color32, Sense, Stroke, StrokeKind, vec2};
+use novadesign_tools::TOOL_GROUPS;
 use serde_json::{Value, json};
 
 use crate::theme::Tokens;

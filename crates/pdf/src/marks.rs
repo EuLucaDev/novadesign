@@ -1,10 +1,10 @@
 //! Printer's marks drawn in the slug area: crop marks at the trim corners, bleed marks at the bleed
 //! corners, and a page-information line. All marks use `[Registration]` (every plate).
 
-use novadesign_geom::{BezPath, Point};
 use krilla::num::NormalizedF32;
 use krilla::paint::{LineCap, LineJoin, Stroke};
 use krilla::surface::Surface;
+use novadesign_geom::{BezPath, Point};
 
 use crate::export::{Exporter, MARK_LEN, Sheet, civil, mark_start, registration, to_path};
 

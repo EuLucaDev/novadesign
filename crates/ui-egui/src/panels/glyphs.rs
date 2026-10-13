@@ -25,10 +25,8 @@ pub fn show(app: &mut DesignApp, ui: &mut egui::Ui) {
     // Default to the font at the text cursor.
     if st.family.is_empty() {
         let a = super::text_attrs(app);
-        st.family = a
-            .as_ref()
-            .and_then(|a| a["chars"]["fontFamily"].as_str().map(str::to_string))
-            .unwrap_or_else(|| novadesign_fonts::DEFAULT_FAMILY.into());
+        st.family =
+            a.as_ref().and_then(|a| a["chars"]["fontFamily"].as_str().map(str::to_string)).unwrap_or_else(|| novadesign_fonts::DEFAULT_FAMILY.into());
         st.style = a.as_ref().and_then(|a| a["chars"]["fontStyle"].as_str().map(str::to_string)).unwrap_or_else(|| "Regular".into());
     }
     let (db, scope) = (super::fonts(app), super::font_scope(app));

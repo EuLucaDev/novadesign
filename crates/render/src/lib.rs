@@ -783,9 +783,7 @@ fn cmyk_lut(rgb: [f32; 3]) -> [f32; 4] {
                 let cms = novadesign_color::cms::active();
                 let step = |i: usize| i as f32 / (N - 1) as f32;
                 let t: Vec<[f32; 4]> = (0..N * N * N)
-                    .map(|i| {
-                        cms.srgb_to_cmyk([step(i / (N * N)), step(i / N % N), step(i % N)], novadesign_color::cms::Intent::RelativeColorimetric)
-                    })
+                    .map(|i| cms.srgb_to_cmyk([step(i / (N * N)), step(i / N % N), step(i % N)], novadesign_color::cms::Intent::RelativeColorimetric))
                     .collect();
                 let t = std::sync::Arc::new(t);
                 *g = Some((settings, t.clone()));
@@ -1227,8 +1225,7 @@ mod tests {
         let (fid, _) =
             d.add_text_frame(SpreadRef::Doc(0), Rect::new(36.0, 36.0, 576.0, 300.0), lid, "Hello Nova Design", ParaFormat::default()).unwrap();
         let id = novadesign_doc::ItemId(d.alloc());
-        let mut box_ =
-            Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(36.0, 400.0, 136.0, 500.0)));
+        let mut box_ = Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(36.0, 400.0, 136.0, 500.0)));
         box_.fill = Fill::swatch("C=100 M=0 Y=0 K=0");
         d.insert_item(SpreadRef::Doc(0), box_, None).unwrap();
         let cache = Cache::new();
@@ -1315,8 +1312,7 @@ mod tests {
         d.swatches.push(novadesign_color::swatch::Swatch::color("Green", novadesign_color::Color::rgb8(0, 255, 0)));
         let lid = d.default_layer();
         let id = novadesign_doc::ItemId(d.alloc());
-        let mut it =
-            Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)));
+        let mut it = Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)));
         it.fill = Fill::swatch("Green");
         d.insert_item(SpreadRef::Doc(0), it, None).unwrap();
         let cache = Cache::new();
@@ -1410,8 +1406,7 @@ mod tests {
         let mut d = Document::new(&NewDocument::default());
         let lid = d.default_layer();
         let id = novadesign_doc::ItemId(d.alloc());
-        let mut it =
-            Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)));
+        let mut it = Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)));
         it.fill = Fill::swatch(novadesign_color::swatch::BLACK);
         d.insert_item(SpreadRef::Doc(0), it, None).unwrap();
         let cache = Cache::new();
@@ -1447,8 +1442,7 @@ mod tests {
             }),
         );
         let id = novadesign_doc::ItemId(d.alloc());
-        let mut it =
-            Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)));
+        let mut it = Item::new(id, lid, novadesign_doc::Shape::Rectangle, novadesign_geom::shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)));
         it.content = novadesign_doc::Content::Graphic(novadesign_doc::Graphic {
             asset: aid,
             size: (100.0, 100.0),

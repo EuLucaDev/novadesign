@@ -1,12 +1,12 @@
 //! Interactive PDF: hyperlink annotations (frames and text ranges → URLs, e-mail, pages) and the
 //! bookmark outline.
 
-use novadesign_doc::{Bookmark, Document, HyperlinkDest, HyperlinkSource, SpreadRef};
-use novadesign_geom::{Affine, Rect};
 use krilla::action::{Action, LinkAction};
 use krilla::annotation::{Annotation, LinkAnnotation, Target};
 use krilla::destination::XyzDestination;
 use krilla::outline::{Outline, OutlineNode};
+use novadesign_doc::{Bookmark, Document, HyperlinkDest, HyperlinkSource, SpreadRef};
+use novadesign_geom::{Affine, Rect};
 
 use crate::export::Sheet;
 

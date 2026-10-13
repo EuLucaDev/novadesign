@@ -16,7 +16,7 @@ fn main() {
     res.set_icon("../../assets/app-icon/novadesign.ico")
         .set("ProductName", "Nova Design")
         .set("FileDescription", "Nova Design page layout")
-        .set("CompanyName", "Learning Machines LLC")
+        .set("CompanyName", "Nova Foods")
         .set("LegalCopyright", "Copyright (c) the Nova Design authors. MIT OR Apache-2.0.")
         .set("OriginalFilename", "novadesign.exe")
         .set("InternalName", "novadesign");

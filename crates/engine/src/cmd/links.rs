@@ -407,12 +407,8 @@ mod shared_asset_tests {
         assert_ne!(same, sid);
         dst.assets.insert(same, Arc::new(asset(same.0, pa)));
         let iid = ItemId(src.alloc());
-        let mut it = Item::new(
-            iid,
-            src.default_layer(),
-            Shape::Rectangle,
-            novadesign_geom::shapes::rectangle(novadesign_geom::Rect::new(0.0, 0.0, 9.0, 9.0)),
-        );
+        let mut it =
+            Item::new(iid, src.default_layer(), Shape::Rectangle, novadesign_geom::shapes::rectangle(novadesign_geom::Rect::new(0.0, 0.0, 9.0, 9.0)));
         it.content = Content::Graphic(Graphic {
             asset: sid,
             size: (4.0, 4.0),

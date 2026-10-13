@@ -454,13 +454,13 @@ impl RgbScan {
 mod tests {
     use std::sync::Arc;
 
+    use hayro_syntax::object::{Name, Object};
+    use image::{ExtendedColorType, ImageEncoder};
     use novadesign_color::{Color, Swatch};
     use novadesign_compose::Cache;
     use novadesign_doc::build::NewDocument;
     use novadesign_doc::{Asset, AssetId, Content, Document, Fill, Fitting, Graphic, Item, ItemId, Shape, SpreadRef};
     use novadesign_geom::{Affine, Rect};
-    use hayro_syntax::object::{Name, Object};
-    use image::{ExtendedColorType, ImageEncoder};
 
     use crate::{ExportReport, PdfOptions, Standard, check_pdfx4, export_pdf_with_report};
 

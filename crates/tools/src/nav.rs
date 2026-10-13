@@ -135,10 +135,7 @@ impl Tool for PlaceGun {
                 let b = cx.layout.to_spread(sr, ev.pos);
                 if (ev.pos - a).hypot() < cx.tol(3.0)
                     && let Some((_, id)) = cx.hit(a)
-                    && cx
-                        .doc
-                        .item(id)
-                        .is_some_and(|i| matches!(i.content, novadesign_doc::Content::Unassigned | novadesign_doc::Content::Graphic(_)))
+                    && cx.doc.item(id).is_some_and(|i| matches!(i.content, novadesign_doc::Content::Unassigned | novadesign_doc::Content::Graphic(_)))
                 {
                     return vec![Action::Exec("place.drop".into(), json!({"frame": id.0}))];
                 }

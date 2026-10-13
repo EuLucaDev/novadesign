@@ -10,15 +10,15 @@ use std::collections::HashMap;
 use std::ops::Range;
 use std::sync::Arc;
 
-use novadesign_compose::{ComposedStory, FrameText, PlacedGlyph};
-use novadesign_fonts::{FontDb, FontFace};
-use novadesign_geom::kurbo::Shape as _;
-use novadesign_geom::{Affine, BezPath, Rect};
 use krilla::geom::Point;
 use krilla::paint::Stroke;
 use krilla::surface::Surface;
 use krilla::tagging::{Artifact, ArtifactType, ContentTag, SpanTag};
 use krilla::text::{Font, GlyphId, KrillaGlyph};
+use novadesign_compose::{ComposedStory, FrameText, PlacedGlyph};
+use novadesign_fonts::{FontDb, FontFace};
+use novadesign_geom::kurbo::Shape as _;
+use novadesign_geom::{Affine, BezPath, Rect};
 
 use crate::export::{Exporter, solid_fill, tf, to_path};
 

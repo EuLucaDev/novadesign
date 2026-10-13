@@ -13,9 +13,9 @@ pub mod styles;
 pub mod swatches;
 pub mod table;
 
+use egui::vec2;
 use novadesign_doc::{Content, StrokeAlign, WrapMode};
 use novadesign_geom::Rect;
-use egui::vec2;
 use serde_json::{Value, json};
 
 use crate::DesignApp;

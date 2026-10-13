@@ -6,27 +6,8 @@ use novadesign_ui_egui::{DesignApp, ImportRequest, ImportedFile, Inbox, Services
 use wasm_bindgen::JsCast as _;
 
 const DOC_EXTS: &[&str] = &["novadesign", "idml"];
-const IMAGE_EXTS: &[&str] = &[
-    "png",
-    "jpg",
-    "jpeg",
-    "gif",
-    "webp",
-    "tif",
-    "tiff",
-    "bmp",
-    "psd",
-    "svg",
-    "pdf",
-    "ai",
-    "txt",
-    "docx",
-    "rtf",
-    "md",
-    "xlsx",
-    "idml",
-    "novadesign",
-];
+const IMAGE_EXTS: &[&str] =
+    &["png", "jpg", "jpeg", "gif", "webp", "tif", "tiff", "bmp", "psd", "svg", "pdf", "ai", "txt", "docx", "rtf", "md", "xlsx", "idml", "novadesign"];
 const CANVAS_ID: &str = "novadesign_canvas";
 const LOADING_ID: &str = "novadesign_loading";
 

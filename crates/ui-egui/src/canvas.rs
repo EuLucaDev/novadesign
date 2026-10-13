@@ -1,12 +1,12 @@
 //! The document canvas: pasteboard, spreads (rendered by `novadesign-render`), guides, frame edges,
 //! selection, text ports and threads, the text caret, rulers, and pointer/keyboard input.
 
+use egui::{Color32, Pos2, Rect, Sense, Stroke, StrokeKind, pos2, vec2};
 use novadesign_compose as compose;
 use novadesign_doc::{Content, Document, Item, PageSide, SpreadRef};
 use novadesign_engine::doc::Selection;
 use novadesign_geom::{Affine, Point, Rect as DRect, Vec2 as DVec2};
 use novadesign_tools::{CanvasLayout, Cursor, Mods, Overlay, PointerEvent, PointerKind, ToolKey};
-use egui::{Color32, Pos2, Rect, Sense, Stroke, StrokeKind, pos2, vec2};
 use serde_json::{Value, json};
 
 use crate::{DesignApp, ScreenMode, View, theme::Tokens};
@@ -410,8 +410,7 @@ fn render_texture(app: &mut DesignApp, ctx: &egui::Context, rect: Rect, xf: &Xf,
     let zoom_same = app.canvas.shown.is_some_and(|s| (s.zoom - xf.zoom).abs() < 1e-9);
     let job = |app: &DesignApp| {
         let st = app.session.active()?;
-        let placed: Vec<novadesign_render::Placed> =
-            layout.slots.iter().map(|s| novadesign_render::Placed { spread: s.spread, xf: s.xf }).collect();
+        let placed: Vec<novadesign_render::Placed> = layout.slots.iter().map(|s| novadesign_render::Placed { spread: s.spread, xf: s.xf }).collect();
         let w = (target.size.0 as f64 * ppp).round().max(1.0) as u32;
         let h = (target.size.1 as f64 * ppp).round().max(1.0) as u32;
         let view = Affine::scale(ppp) * Affine::scale(xf.zoom) * Affine::translate((-target.origin.x, -target.origin.y));
@@ -1773,8 +1772,8 @@ fn guide_drag(app: &mut DesignApp, ui: &mut egui::Ui, resp: &egui::Response, rec
 
 #[cfg(test)]
 mod tests {
-    use novadesign_geom::Unit;
     use egui_kittest::{Harness, kittest::Queryable};
+    use novadesign_geom::Unit;
 
     use super::*;
 

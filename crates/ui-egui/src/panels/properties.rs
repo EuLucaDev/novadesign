@@ -2,10 +2,10 @@
 //! sections per selection state — `plan/indesign/11-observed-ui.md` §4.1) and small
 //! single-purpose panels (Stroke, Character, Paragraph, Text Wrap, Align, Links, Info).
 
+use egui::{Rect, Sense, Stroke, StrokeKind, Ui, pos2, vec2};
 use novadesign_doc::{Align, Arrowhead, Cap, Join, StrokeAlign, StrokeType};
 use novadesign_geom::Unit;
 use novadesign_geom::corners::CornerShape;
-use egui::{Rect, Sense, Stroke, StrokeKind, Ui, pos2, vec2};
 use serde_json::{Value, json};
 
 use super::{SelInfo, sel_info, text_attrs};

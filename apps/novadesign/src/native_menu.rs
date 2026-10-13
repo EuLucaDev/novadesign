@@ -5,10 +5,10 @@
 use std::collections::HashMap;
 use std::str::FromStr;
 
-use novadesign_ui_egui::DesignApp;
-use novadesign_ui_egui::menus::{self, Item};
 use muda::accelerator::Accelerator;
 use muda::{CheckMenuItem, Menu, MenuEvent, MenuItem, PredefinedMenuItem, Submenu};
+use novadesign_ui_egui::DesignApp;
+use novadesign_ui_egui::menus::{self, Item};
 use serde_json::Value;
 
 enum Handle {

@@ -3,12 +3,6 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 
-use novadesign_color::swatch::{ColorType, SwatchValue};
-use novadesign_color::{BlendMode as DcBlend, Color, GradientKind};
-use novadesign_compose::Cache;
-use novadesign_doc::{AssetId, Content, Document, Item, PageSide, Spread, StrokeAlign, StrokeType};
-use novadesign_geom::kurbo::{PathEl, Shape as _};
-use novadesign_geom::{Affine, BezPath, Rect, Vec2, corners};
 use krilla::color::{cmyk, luma, rgb};
 use krilla::configure::{Archival, ConfigurationBuilder, PdfVersion};
 use krilla::geom::{Path, PathBuilder, Size, Transform};
@@ -19,6 +13,12 @@ use krilla::page::PageSettings;
 use krilla::paint::{Fill, FillRule, LinearGradient, RadialGradient, SpreadMethod, Stop, Stroke, StrokeDash};
 use krilla::surface::Surface;
 use krilla::tagging::{Artifact, ArtifactType, ContentTag, Identifier, Tag, TagGroup, TagTree};
+use novadesign_color::swatch::{ColorType, SwatchValue};
+use novadesign_color::{BlendMode as DcBlend, Color, GradientKind};
+use novadesign_compose::Cache;
+use novadesign_doc::{AssetId, Content, Document, Item, PageSide, Spread, StrokeAlign, StrokeType};
+use novadesign_geom::kurbo::{PathEl, Shape as _};
+use novadesign_geom::{Affine, BezPath, Rect, Vec2, corners};
 
 use crate::{ExportReport, PdfError, PdfOptions, Result, Standard};
 

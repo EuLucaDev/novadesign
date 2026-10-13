@@ -2,8 +2,8 @@
 //! Nova Foods mark, version, and community links (Suporte first and largest), plus the other Nova Foods
 //! apps; Contributors and Models are the compiled-in credits (`crate::credits`).
 
-use novadesign_engine::links;
 use egui::{Color32, Rect, Sense, Stroke, pos2, vec2};
+use novadesign_engine::links;
 use serde_json::json;
 
 use crate::DesignApp;
@@ -179,9 +179,12 @@ pub fn show(app: &mut DesignApp, ctx: &egui::Context) {
                 // Centre the row of links.
                 let w = 330.0;
                 ui.add_space(((ui.available_width() - w) / 2.0).max(0.0));
-                for (text, key) in
-                    [("Nova Design page", "appPage"), ("GitHub", "github"), ("workflowind.agcunae.com/apps", "website"), ("Report an issue", "issues")]
-                {
+                for (text, key) in [
+                    ("Nova Design page", "appPage"),
+                    ("GitHub", "github"),
+                    ("workflowind.agcunae.com/apps", "website"),
+                    ("Report an issue", "issues"),
+                ] {
                     if link(ui, text, links::get(key).unwrap_or_default(), t.accent) {
                         open = Some(key);
                     }

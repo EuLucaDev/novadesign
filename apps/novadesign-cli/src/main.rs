@@ -71,12 +71,7 @@ non-zero exit when a step fails."#;
 
 /// The links line under the usage block.
 fn usage_footer() -> String {
-    format!(
-        "\nCommunity: {}  ·  {}  ·  {}",
-        novadesign_engine::links::DISCORD,
-        novadesign_engine::links::APP_PAGE,
-        novadesign_engine::links::GITHUB
-    )
+    format!("\nCommunity: {}  ·  {}  ·  {}", novadesign_engine::links::DISCORD, novadesign_engine::links::APP_PAGE, novadesign_engine::links::GITHUB)
 }
 
 /// stdout went away. A reader that stopped early (a closed pipe) ends the program quietly, as

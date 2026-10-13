@@ -781,12 +781,8 @@ fn round_trips_frames_with_pasted_in_items() {
     let mut d = Document::new(&NewDocument::default());
     let lid = d.default_layer();
     let inner = novadesign_doc::Item::new(novadesign_doc::ItemId(d.alloc()), lid, Shape::Oval, shapes::ellipse(Rect::new(0.0, 0.0, 300.0, 300.0)));
-    let mut frame = novadesign_doc::Item::new(
-        novadesign_doc::ItemId(d.alloc()),
-        lid,
-        Shape::Rectangle,
-        shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)),
-    );
+    let mut frame =
+        novadesign_doc::Item::new(novadesign_doc::ItemId(d.alloc()), lid, Shape::Rectangle, shapes::rectangle(Rect::new(100.0, 100.0, 200.0, 200.0)));
     frame.content = novadesign_doc::Content::Group { items: vec![std::sync::Arc::new(inner)] };
     d.insert_item(SpreadRef::Doc(0), frame, None).unwrap();
     let back = import_idml(&export_idml(&d)).unwrap();

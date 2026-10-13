@@ -1373,9 +1373,8 @@ impl<'r> Importer<'r> {
                 GridAlign::AllLines
             });
         }
-        a.composer = e
-            .prop("Composer")
-            .map(|c| if c.contains("Single") { novadesign_doc::Composer::SingleLine } else { novadesign_doc::Composer::Paragraph });
+        a.composer =
+            e.prop("Composer").map(|c| if c.contains("Single") { novadesign_doc::Composer::SingleLine } else { novadesign_doc::Composer::Paragraph });
         a.hyphenate = e.boolean("Hyphenation");
         a.hyph_min_word = u("HyphenateWordsLongerThan");
         a.hyph_after_first = u("HyphenateAfterFirst");

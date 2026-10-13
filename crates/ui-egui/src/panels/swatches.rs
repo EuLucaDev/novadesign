@@ -1,7 +1,7 @@
 //! Swatches and Color panels.
 
-use novadesign_color::{ColorType, SwatchValue};
 use egui::{Sense, vec2};
+use novadesign_color::{ColorType, SwatchValue};
 use serde_json::json;
 
 use crate::theme::Tokens;
