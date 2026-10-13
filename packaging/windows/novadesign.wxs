@@ -11,13 +11,13 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
       Name="NovaDesign"
-      Manufacturer="Learning Machines LLC"
+      Manufacturer="Nova Foods"
       Version="$(var.Version)"
-      UpgradeCode="49E87D30-BB68-4896-AA1D-F45C833CFC3C"
+      UpgradeCode="56CC4B14-5F31-56E9-B2CC-ACCFFAD61DDE"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="NovaDesign page layout and publishing" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="NovaDesign page layout and publishing" Manufacturer="Nova Foods" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
@@ -42,7 +42,7 @@
 
   <Fragment>
     <ComponentGroup Id="NovadesignFiles" Directory="INSTALLFOLDER">
-      <Component Id="NovadesignApp" Guid="DE018EF3-EE87-4E36-9F76-0B7B060A195E">
+      <Component Id="NovadesignApp" Guid="858B735E-EB47-577A-B5E0-DDC0EBDB7810">
         <File Id="NovadesignExe" Source="$(var.BinDir)\novadesign.exe" KeyPath="yes">
           <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="NovaDesign"
               Description="NovaDesign page layout and publishing" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
@@ -54,6 +54,9 @@
 
       <Component Id="NovadesignCli">
         <File Id="NovadesignCliExe" Source="$(var.BinDir)\novadesign-cli.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="NovaFoodsLegalNotice">
+        <File Id="NovaFoodsLegalNoticeFile" Source="$(sys.SOURCEFILEDIR)..\..\NOTICE" KeyPath="yes" />
       </Component>
     </ComponentGroup>
   </Fragment>

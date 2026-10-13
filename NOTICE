@@ -19,7 +19,7 @@ list (author, source, license) is in ASSETS.md.
 - JetBrains Mono (assets/fonts/JetBrainsMono-*.ttf) — SIL Open Font License 1.1. See assets/fonts/OFL-JetBrainsMono.txt.
 - English hyphenation word list (assets/hyphenation/en-us.dic) — derived from the Moby Hyphenator II
   list by Grady Ward, public domain (Project Gutenberg eBook #3204). The hyphenation patterns
-  (assets/hyphenation/en-us.pat) are trained from it by Nova Design and released as CC0-1.0.
+  (assets/hyphenation/en-us.pat) are trained from it by DesignCraft and released as CC0-1.0.
 - Spanish hyphenation patterns, embedded through the hypher crate (feature "spanish"):
   hyph-es.tex 5.0 from hyph-utf8, https://github.com/hyphenation/tex-hyphen.
   Copyright (C) 1993, 1997 Javier Bezos, 2001-2019 Javier Bezos, CervanTeX. MIT License:
@@ -54,11 +54,11 @@ list (author, source, license) is in ASSETS.md.
   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
   LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-- Japanese fonts (novafoods-fonts): builds made with novafoods-fonts (NOVAFOODS_FONTS_DIR; all official
+- Japanese fonts (craft-fonts): builds made with craft-fonts (CRAFT_FONTS_DIR; all official
   releases) embed the fonts listed in
-  https://github.com/EuLucaDev/novafoods-fonts/blob/main/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,
+  https://github.com/storytold/craft-fonts/blob/main/ATTRIBUTION.md (BIZ UDPGothic, BIZ UDMincho,
   Shippori Mincho), under the SIL Open Font License 1.1. Their licence texts ship with the
-  packages as OFL-<family>.txt. Builds without NOVAFOODS_FONTS_DIR do not include them.
+  packages as OFL-<family>.txt. Builds without CRAFT_FONTS_DIR do not include them.
 - All UI icons are drawn in code (crates/ui-egui/src/icons.rs) and are original work, MIT OR Apache-2.0.
 
 Rust dependencies (vello_cpu, kurbo, skrifa, harfrust, image, egui, eframe, …) are permissively
