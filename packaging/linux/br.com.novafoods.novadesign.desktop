@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Nova Design
+GenericName=Page Layout
+Comment=Lay out magazines, books and print documents
+Exec=novadesign %F
+TryExec=novadesign
+Icon=br.com.novafoods.novadesign
+Terminal=false
+StartupNotify=true
+StartupWMClass=br.com.novafoods.novadesign
+Categories=Graphics;Publishing;
+Keywords=layout;page;desktop publishing;dtp;magazine;book;indesign;idml;typesetting;

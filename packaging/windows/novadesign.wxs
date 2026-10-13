@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  NovaDesign MSI (WiX Toolset v5: `dotnet tool install -g wix`). Built by package.ps1:
+
+    wix build novadesign.wxs -arch x64 -d Version=1.2.3 -d BinDir=... -d IconPath=... -o out.msi
+
+  Per-machine install into Program Files, a Start Menu shortcut, `.pcraft` owned by NovaDesign,
+  and NovaDesign offered under "Open with" for PSD/PSB and the image formats it reads (without
+  taking over the user's default app for them).
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+      Name="NovaDesign"
+      Manufacturer="Learning Machines LLC"
+      Version="$(var.Version)"
+      UpgradeCode="49E87D30-BB68-4896-AA1D-F45C833CFC3C"
+      Scope="perMachine"
+      Compressed="yes"
+      Language="1033">
+    <SummaryInformation Description="NovaDesign page layout and publishing" Manufacturer="Learning Machines LLC" />
+    <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
+         (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
+    <MajorUpgrade AllowSameVersionUpgrades="yes"
+        DowngradeErrorMessage="A newer version of NovaDesign is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <Icon Id="NovadesignIcon.ico" SourceFile="$(var.IconPath)" />
+    <Property Id="ARPPRODUCTICON" Value="NovadesignIcon.ico" />
+    <Property Id="ARPURLINFOABOUT" Value="https://workflowind.agcunae.com/apps/novadesign" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://workflowind.agcunae.com/apps/novadesign" />
+    <Property Id="ARPHELPLINK" Value="https://workflowind.agcunae.com/inbox" />
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="NovaDesign" />
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder" />
+
+    <Feature Id="Main" Title="NovaDesign" Level="1">
+      <ComponentGroupRef Id="NovadesignFiles" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <ComponentGroup Id="NovadesignFiles" Directory="INSTALLFOLDER">
+      <Component Id="NovadesignApp" Guid="DE018EF3-EE87-4E36-9F76-0B7B060A195E">
+        <File Id="NovadesignExe" Source="$(var.BinDir)\novadesign.exe" KeyPath="yes">
+          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="NovaDesign"
+              Description="NovaDesign page layout and publishing" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
+              Icon="NovadesignIcon.ico" IconIndex="0" />
+        </File>
+
+        <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\novadesign.exe" Value="[#NovadesignExe]" Type="string" />
+      </Component>
+
+      <Component Id="NovadesignCli">
+        <File Id="NovadesignCliExe" Source="$(var.BinDir)\novadesign-cli.exe" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

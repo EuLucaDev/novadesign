@@ -1,0 +1,14 @@
+[package]
+name = "novadesign-epub"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "NovaDesign EPUB 3 (reflowable) export: stories in reading order, CSS from styles, images"
+
+[lints]
+workspace = true
+
+[dependencies]
+novadesign-doc = { workspace = true }
+novadesign-color = { workspace = true }
+zip = { workspace = true }

@@ -1,0 +1,17 @@
+[package]
+name = "novadesign-tools"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "NovaDesign tools: pointer events in, commands and overlays out (Selection, Direct Selection, frames, Type, Hand, Zoom…)"
+
+[lints]
+workspace = true
+
+[dependencies]
+novadesign-geom = { workspace = true }
+novadesign-color = { workspace = true }
+novadesign-doc = { workspace = true }
+novadesign-compose = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

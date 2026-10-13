@@ -1,0 +1,16 @@
+[package]
+name = "novadesign-format"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "NovaDesign native file format: zip with document.json and embedded assets; versioned"
+
+[lints]
+workspace = true
+
+[dependencies]
+novadesign-doc = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+zip = { workspace = true }
+thiserror = { workspace = true }

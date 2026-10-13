@@ -1,0 +1,41 @@
+[package]
+name = "novadesign-ui-egui"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "NovaDesign egui frontend (InDesign-style UI); swappable — nothing below depends on it"
+
+[lints]
+workspace = true
+
+[dependencies]
+nova-ui = { workspace = true }
+novadesign-geom = { workspace = true }
+novadesign-color = { workspace = true }
+novadesign-doc = { workspace = true }
+novadesign-fonts = { workspace = true }
+novadesign-compose = { workspace = true }
+novadesign-render = { workspace = true }
+novadesign-tools = { workspace = true }
+novadesign-engine = { workspace = true }
+unicode-bidi = { workspace = true }
+unicode-bidi-mirroring = { workspace = true }
+unicode-segmentation = { workspace = true }
+regex = { workspace = true }
+egui = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+log = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+novadesign-idml = { workspace = true }
+zip = { workspace = true }
+# Headless (offscreen wgpu) rendering of the whole window for UI screenshots: `examples/ui_shot.rs`.
+egui_kittest = { workspace = true, features = ["wgpu", "snapshot"] }
+novadesign-fonts = { workspace = true, features = ["testing"] }
+
+[build-dependencies]
+serde_json = { workspace = true }
+toml = "1"

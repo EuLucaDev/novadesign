@@ -1,0 +1,25 @@
+[package]
+name = "novadesign-compose"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "NovaDesign text composition: paragraph composer (Knuth–Plass), hyphenation, justification, columns, threading, wrap"
+
+[lints]
+workspace = true
+
+[dependencies]
+unicode-bidi = { workspace = true }
+unicode-bidi-mirroring = { workspace = true }
+novadesign-geom = { workspace = true }
+novadesign-color = { workspace = true }
+novadesign-doc = { workspace = true }
+novadesign-fonts = { workspace = true }
+log = { workspace = true }
+regex = { workspace = true }
+miniz_oxide = "0.8"
+hypher = { version = "0.1.8", default-features = false, features = ["alloc", "portuguese", "spanish"] }
+
+[dev-dependencies]
+novadesign-fonts = { workspace = true, features = ["testing"] }
+proptest = { workspace = true }
