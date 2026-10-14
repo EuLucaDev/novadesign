@@ -239,6 +239,8 @@ fn control_port_from(source: &str, value: Option<String>) -> Option<u16> {
 }
 
 fn main() -> eframe::Result {
+    #[cfg(not(target_arch = "wasm32"))]
+    novadesign_ui_egui::live_ui::install_link_handler();
     // First, so every start-up record (and the engine's panic hook, installed with the first
     // Session) is captured; see `logging`.
     let logger = logging::install();

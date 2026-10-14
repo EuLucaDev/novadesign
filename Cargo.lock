@@ -2520,15 +2520,26 @@ checksum = "2bf50223579dc7cdcfb3bfcacf7069ff68243f8c363f62ffa99cf000a6b9c451"
 [[package]]
 name = "nova-live"
 version = "0.1.0"
-source = "git+https://github.com/EuLucaDev/nova-live?rev=73c86a72931074d3a0b55997ac0d9dc64237cfa1#73c86a72931074d3a0b55997ac0d9dc64237cfa1"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c#4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c"
 dependencies = [
  "base64",
  "getrandom 0.4.3",
+ "nova-live-macos",
  "rustls",
  "serde",
  "serde_json",
  "tungstenite",
  "webpki-roots",
+ "windows-registry",
+]
+
+[[package]]
+name = "nova-live-macos"
+version = "0.1.0"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c#4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c"
+dependencies = [
+ "objc2 0.6.4",
+ "objc2-foundation 0.3.2",
 ]
 
 [[package]]
@@ -2548,7 +2559,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "eframe",
  "egui",
@@ -2565,7 +2576,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-cli"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "novadesign-color",
  "novadesign-compose",
@@ -2581,7 +2592,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-color"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "kurbo",
  "moxcms",
@@ -2593,7 +2604,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-compose"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "hypher",
  "log",
@@ -2610,7 +2621,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-doc"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "novadesign-color",
  "novadesign-geom",
@@ -2622,7 +2633,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-engine"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "caseless",
  "hayro-cmap",
@@ -2656,7 +2667,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-epub"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "novadesign-color",
  "novadesign-doc",
@@ -2665,7 +2676,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-fonts"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "harfrust 0.13.3",
  "kurbo",
@@ -2677,7 +2688,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-format"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "novadesign-doc",
  "serde",
@@ -2688,7 +2699,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-geom"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "flo_curves",
  "kurbo",
@@ -2701,7 +2712,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-idml"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "novadesign-color",
  "novadesign-compose",
@@ -2714,7 +2725,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-images"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "image",
  "novadesign-color",
@@ -2725,7 +2736,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-mcp"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "image",
  "log",
@@ -2738,7 +2749,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-pdf"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "hayro-cmap",
  "hayro-interpret",
@@ -2760,7 +2771,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-render"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "hayro",
  "image",
@@ -2778,7 +2789,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-textimport"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "novadesign-doc",
  "quick-xml 0.38.4",
@@ -2787,7 +2798,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-tools"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "novadesign-color",
  "novadesign-compose",
@@ -2799,7 +2810,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-ui-egui"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "egui",
  "egui_kittest",
@@ -2828,7 +2839,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-web"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "eframe",
  "egui",
@@ -5560,6 +5571,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "windows-registry"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02752bf7fbdcce7f2a27a742f798510f3e5ad88dbe84871e5168e2120c3d5720"
+dependencies = [
+ "windows-link",
+ "windows-result",
+ "windows-strings",
+]
+
+[[package]]
 name = "windows-result"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5922,7 +5944,7 @@ checksum = "9440ea3e5aeabb0ac63af70daf835274065238cdd0cec83418f417eae38bacee"
 
 [[package]]
 name = "xtask"
-version = "0.8.0"
+version = "0.9.0"
 dependencies = [
  "serde_json",
 ]

@@ -107,6 +107,10 @@ impl Session {
         let st = self.doc_mut()?;
         st.doc = Arc::new(doc);
         st.revision += 1;
+        // O desfazer guarda fotos do documento: depois de uma alteração de colega, desfazer o
+        // passo anterior apagaria o trabalho dele. O histórico local recomeça daqui.
+        st.history.undo.clear();
+        st.history.redo.clear();
         keep_valid(st);
         let rev = st.revision;
         self.live.seen = rev;
@@ -124,10 +128,7 @@ impl Session {
         let i = self.live_index()?;
         let prev = self.active_index();
         self.set_active(i);
-        let (local_sel, undo_len) = {
-            let d = self.doc()?;
-            (d.selection.clone(), d.history.undo.len())
-        };
+        let local_sel = self.doc()?.selection.clone();
         if let Some(sel) = ctx.get("selection").and_then(|s| serde_json::from_value::<Selection>(s.clone()).ok()) {
             self.doc_mut()?.selection = sel;
         }
@@ -135,7 +136,8 @@ impl Session {
         let r = self.execute(cmd, params);
         self.live.applying = false;
         if let Ok(st) = self.doc_mut() {
-            st.history.undo.truncate(undo_len);
+            st.history.undo.clear();
+            st.history.redo.clear();
             st.selection = local_sel;
             keep_valid(st);
             let rev = st.revision;
