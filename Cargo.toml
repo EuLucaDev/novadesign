@@ -102,3 +102,8 @@ debug = 0
 # Opt-in cancelable macOS termination on the pinned winit 0.30 line.
 [patch.crates-io]
 winit = { git = "https://github.com/skylartaylor/winit.git", rev = "3d51077fd1a966f84df9ef287839dc84fd5b4ca7" }
+# The hayro crates from novapdf's vendor/ directory, with the patches its README lists.
+hayro = { path = "vendor/novapdf-b5467d93a0/vendor/hayro" }
+hayro-interpret = { path = "vendor/novapdf-b5467d93a0/vendor/hayro-interpret" }
+hayro-syntax = { path = "vendor/novapdf-b5467d93a0/vendor/hayro-syntax" }
+hayro-jbig2 = { path = "vendor/novapdf-b5467d93a0/vendor/hayro-jbig2" }

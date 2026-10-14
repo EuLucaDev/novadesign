@@ -53,7 +53,7 @@ mod tests {
     fn download_mime_matches_native_package_and_existing_exports() {
         for (name, expected) in [
             ("Quarterly.novadesign", novadesign_format::MIME),
-            ("日本語.multi.DEsignCraft", novadesign_format::MIME),
+            ("日本語.multi.NOvaDesign", novadesign_format::MIME),
             ("page.pdf", "application/pdf"),
             ("page.png", "image/png"),
             ("page.jpg", "image/jpeg"),
