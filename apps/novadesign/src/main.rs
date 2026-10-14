@@ -245,7 +245,7 @@ fn main() -> eframe::Result {
     let mut control_port = control_port_from("NOVADESIGN_CONTROL_PORT", std::env::var("NOVADESIGN_CONTROL_PORT").ok());
     let mut files = Vec::new();
     let mut sample = false;
-    let mut args = std::env::args().skip(1);
+    let mut args = std::env::args().skip(1).filter(|arg| !novadesign_ui_egui::live_ui::is_invite_arg(arg));
     while let Some(a) = args.next() {
         match a.as_str() {
             "--control" => control_port = control_port_from("--control", args.next()),
@@ -326,6 +326,7 @@ fn main() -> eframe::Result {
             session.recovery_dir = profile::recovery_dir();
             let recovered = session.execute("file.recovery.open", &serde_json::json!({})).ok();
             let mut app = DesignApp::new(session, services());
+            app.live.pending_join = novadesign_ui_egui::live_ui::launch_invite();
             if let Some(line) = gpu.as_ref().and_then(gpu::Startup::status_line) {
                 app.status(line);
             }

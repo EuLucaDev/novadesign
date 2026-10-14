@@ -9,6 +9,7 @@
 
 #[cfg(not(target_arch = "wasm32"))]
 pub mod atomic;
+pub mod live;
 pub mod cmd;
 pub mod dtd;
 pub mod guard;
@@ -282,6 +283,8 @@ pub struct Session {
     pub book: Option<cmd::book::Book>,
     /// Content Collector conveyor: collected objects as snippets (name, bytes).
     pub conveyor: Vec<(String, Vec<u8>)>,
+    /// Colaboração em tempo real (Nova Live), ver `live`.
+    pub live: live::LiveState,
 }
 
 impl Default for Session {
@@ -311,6 +314,7 @@ impl Session {
             conveyor: Vec::new(),
             book: None,
             untitled: 0,
+            live: live::LiveState::default(),
         }
     }
 
@@ -397,7 +401,10 @@ impl Session {
     /// Run command `id`. A panic inside it becomes [`EngineError::Internal`] and leaves the
     /// document as it was (see [`guard`]).
     pub fn execute(&mut self, id: &str, params: &Value) -> Result<Value> {
-        self.guarded(id, |s| s.execute_unguarded(id, params))
+        self.live.depth += 1;
+        let r = self.guarded(id, |s| s.execute_unguarded(id, params));
+        self.live.depth -= 1;
+        r
     }
 
     fn execute_unguarded(&mut self, id: &str, params: &Value) -> Result<Value> {
@@ -419,6 +426,7 @@ impl Session {
             self.stop_data_preview();
         }
         let before = self.active().map(|d| (d.uid, d.doc.clone()));
+        let live_ctx = self.live.doc.is_some().then(|| self.active().map(|d| live::context(&d.selection))).flatten();
         let r = (spec.run)(self, params)?;
         // Undo, redo or deleting layers can take the active layer away: new objects would land on
         // a layer that isn't there (invisible, not exported). Fall back to the top layer.
@@ -451,6 +459,10 @@ impl Session {
         {
             let entry = HistoryEntry { label: spec.label.to_string(), doc: old, selection: st.selection.clone() };
             push_undo(st, entry);
+        }
+        if let Some(ctx) = live_ctx {
+            let replicable = spec.undoable && self.active().is_some_and(|d| d.interaction.is_none());
+            self.live_record(id, params, replicable, ctx);
         }
         if spec.journal {
             self.journal.push((id.to_string(), params.clone()));

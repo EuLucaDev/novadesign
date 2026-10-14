@@ -7,6 +7,8 @@
 #![forbid(unsafe_code)]
 
 pub mod about;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod live_ui;
 pub mod canvas;
 pub mod chrome;
 pub mod control;
@@ -521,6 +523,9 @@ pub struct DesignApp {
     pub(crate) quit_without_asking: bool,
     /// No document is discarded until every unsaved document has an up-to-date approval.
     quitting: Option<QuitState>,
+    /// Colaboração em tempo real (Nova Live).
+    #[cfg(not(target_arch = "wasm32"))]
+    pub live: live_ui::LiveUi,
 }
 
 struct QuitState {
@@ -534,6 +539,8 @@ impl DesignApp {
         // The font menus and the first file opened need the installed fonts: catalog them now.
         novadesign_fonts::FontDb::global().scan_in_background();
         DesignApp {
+            #[cfg(not(target_arch = "wasm32"))]
+            live: live_ui::LiveUi::default(),
             pending_pdf: None,
             session,
             ui: UiState::default(),
@@ -1023,6 +1030,8 @@ impl DesignApp {
     /// Lay out the whole window.
     pub fn ui(&mut self, ui: &mut egui::Ui) {
         let ctx = ui.ctx().clone();
+        #[cfg(not(target_arch = "wasm32"))]
+        live_ui::pump(self, &ctx);
         if !self.fonts_ready {
             ctx.request_repaint();
             return;
@@ -1148,6 +1157,8 @@ impl DesignApp {
         dock::flyout(self, &ctx);
         dock::floating(self, &ctx);
         story_editor::show(self, &ctx);
+        #[cfg(not(target_arch = "wasm32"))]
+        live_ui::window(self, &ctx);
         dialogs::show(self, &ctx);
         about::show(self, &ctx);
         menus::palette(self, &ctx);
