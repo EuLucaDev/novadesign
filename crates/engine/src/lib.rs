@@ -9,11 +9,11 @@
 
 #[cfg(not(target_arch = "wasm32"))]
 pub mod atomic;
-pub mod live;
 pub mod cmd;
 pub mod dtd;
 pub mod guard;
 pub mod links;
+pub mod live;
 pub mod math;
 pub mod recovery;
 pub mod sample;

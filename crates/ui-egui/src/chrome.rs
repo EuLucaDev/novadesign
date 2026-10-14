@@ -121,8 +121,8 @@ pub fn app_bar(app: &mut DesignApp, ui: &mut egui::Ui) {
                         );
                         ui.add_space(6.0);
                         #[cfg(not(target_arch = "wasm32"))]
-        crate::live_ui::button(app, ui);
-        if icons::button(ui, "share", 22.0, false, crate::i18n::tr(&app.ui.language, "Share")).clicked() {
+                        crate::live_ui::button(app, ui);
+                        if icons::button(ui, "share", 22.0, false, crate::i18n::tr(&app.ui.language, "Share")).clicked() {
                             app.status("Export a PDF, IDML or package to share — no cloud account needed.");
                         }
                         ui.add_space(8.0);

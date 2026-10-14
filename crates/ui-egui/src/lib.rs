@@ -7,8 +7,6 @@
 #![forbid(unsafe_code)]
 
 pub mod about;
-#[cfg(not(target_arch = "wasm32"))]
-pub mod live_ui;
 pub mod canvas;
 pub mod chrome;
 pub mod control;
@@ -17,6 +15,8 @@ pub mod dialogs;
 pub mod dock;
 pub mod i18n;
 pub mod icons;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod live_ui;
 pub mod menus;
 mod panel_docking;
 pub mod panels;
