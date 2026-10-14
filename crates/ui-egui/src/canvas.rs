@@ -244,6 +244,22 @@ pub fn show(app: &mut DesignApp, ui: &mut egui::Ui) {
         fit(app, rect, "spread");
     }
     handle_input(app, ui, &resp, rect);
+    // Colaboração: o mouse vai em coordenadas da área de páginas (todas as páginas ficam nela).
+    #[cfg(not(target_arch = "wasm32"))]
+    if app.session.live_on_screen()
+        && let Some(&v) = app.view()
+    {
+        let xf = Xf::new(rect, &v);
+        app.live.view = Some(crate::live_ui::LiveView::new(
+            rect,
+            "paginas",
+            move |p| {
+                let q = xf.to_canvas(p);
+                (q.x, q.y)
+            },
+            move |x, y| xf.to_screen(Point::new(x, y)),
+        ));
+    }
     let Some(st) = app.session.active() else { return };
     let Some(&v) = app.view() else { return };
     let xf = Xf::new(rect, &v);

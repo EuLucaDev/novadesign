@@ -64,6 +64,11 @@ impl Session {
         Ok(())
     }
 
+    /// O documento compartilhado é o que está na tela? (Os mouses dos colegas só aparecem nele.)
+    pub fn live_on_screen(&self) -> bool {
+        self.live_index().ok() == self.active_index()
+    }
+
     pub fn live_stop(&mut self) {
         self.live = LiveState::default();
     }
