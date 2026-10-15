@@ -57,6 +57,10 @@ impl eframe::App for App {
         self.app.raw_input_hook(raw);
     }
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+        #[cfg(not(target_arch = "wasm32"))]
+        if !novadesign_ui_egui::account_ui::gate(ui, "novadesign") {
+            return;
+        }
         self.app.ui(ui);
     }
     fn on_exit(&mut self) {
