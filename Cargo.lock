@@ -2555,7 +2555,7 @@ checksum = "2bf50223579dc7cdcfb3bfcacf7069ff68243f8c363f62ffa99cf000a6b9c451"
 [[package]]
 name = "nova-account-ui"
 version = "0.1.0"
-source = "git+https://github.com/EuLucaDev/nova-live?rev=25720ad8a7aa8cc6e10ffd13091bd69873d9fd95#25720ad8a7aa8cc6e10ffd13091bd69873d9fd95"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=d0c50673eb1b525c3efbfda72e33bdeb4569e1e7#d0c50673eb1b525c3efbfda72e33bdeb4569e1e7"
 dependencies = [
  "egui",
  "image",
@@ -2565,7 +2565,7 @@ dependencies = [
 [[package]]
 name = "nova-live"
 version = "0.1.0"
-source = "git+https://github.com/EuLucaDev/nova-live?rev=25720ad8a7aa8cc6e10ffd13091bd69873d9fd95#25720ad8a7aa8cc6e10ffd13091bd69873d9fd95"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=d0c50673eb1b525c3efbfda72e33bdeb4569e1e7#d0c50673eb1b525c3efbfda72e33bdeb4569e1e7"
 dependencies = [
  "base64 0.22.1",
  "getrandom 0.4.3",
@@ -2582,7 +2582,7 @@ dependencies = [
 [[package]]
 name = "nova-live-macos"
 version = "0.1.0"
-source = "git+https://github.com/EuLucaDev/nova-live?rev=25720ad8a7aa8cc6e10ffd13091bd69873d9fd95#25720ad8a7aa8cc6e10ffd13091bd69873d9fd95"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=d0c50673eb1b525c3efbfda72e33bdeb4569e1e7#d0c50673eb1b525c3efbfda72e33bdeb4569e1e7"
 dependencies = [
  "objc2 0.6.4",
  "objc2-foundation 0.3.2",
@@ -2598,7 +2598,7 @@ dependencies = [
 [[package]]
 name = "nova-themes"
 version = "0.1.0"
-source = "git+https://github.com/EuLucaDev/nova-live?rev=09fedc5f70f977109e5d76c4e89db37e0f54ee50#09fedc5f70f977109e5d76c4e89db37e0f54ee50"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=d0c50673eb1b525c3efbfda72e33bdeb4569e1e7#d0c50673eb1b525c3efbfda72e33bdeb4569e1e7"
 dependencies = [
  "serde",
 ]
@@ -2613,7 +2613,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "arboard",
  "eframe",
@@ -2631,7 +2631,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-cli"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "novadesign-color",
  "novadesign-compose",
@@ -2647,7 +2647,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-color"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "kurbo",
  "moxcms",
@@ -2659,7 +2659,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-compose"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "hypher",
  "log",
@@ -2677,7 +2677,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-doc"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "novadesign-color",
  "novadesign-geom",
@@ -2689,7 +2689,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-engine"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "caseless",
  "hayro-cmap",
@@ -2724,7 +2724,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-epub"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "novadesign-color",
  "novadesign-doc",
@@ -2733,7 +2733,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-fonts"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "harfrust 0.13.3",
  "kurbo",
@@ -2745,7 +2745,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-format"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "novadesign-doc",
  "serde",
@@ -2756,7 +2756,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-geom"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "flo_curves",
  "kurbo",
@@ -2769,7 +2769,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-idml"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "novadesign-color",
  "novadesign-compose",
@@ -2782,7 +2782,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-images"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "image",
  "novadesign-color",
@@ -2793,7 +2793,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-mcp"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "image",
  "log",
@@ -2806,7 +2806,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-pdf"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "hayro-cmap",
  "hayro-interpret",
@@ -2828,7 +2828,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-render"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "hayro",
  "image",
@@ -2846,7 +2846,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-textimport"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "novadesign-doc",
  "quick-xml 0.38.4",
@@ -2855,7 +2855,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-tools"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "novadesign-color",
  "novadesign-compose",
@@ -2867,7 +2867,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-ui-egui"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "egui",
  "egui_kittest",
@@ -2898,7 +2898,7 @@ dependencies = [
 
 [[package]]
 name = "novadesign-web"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "eframe",
  "egui",
@@ -6094,7 +6094,7 @@ checksum = "9440ea3e5aeabb0ac63af70daf835274065238cdd0cec83418f417eae38bacee"
 
 [[package]]
 name = "xtask"
-version = "0.11.1"
+version = "0.12.0"
 dependencies = [
  "serde_json",
 ]

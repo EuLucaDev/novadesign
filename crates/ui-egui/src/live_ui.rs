@@ -1,7 +1,7 @@
 //! Colaborar (Nova Live): convidar pessoas para editar o documento ao vivo, entrar por um convite e
 //! ver quem está na sessão. A rede fica em `nova_live`; o motor sabe o que replicar (`live`).
 
-use egui::{Context, RichText};
+use egui::Context;
 use nova_live::{Change, Invite, Live, Notice, Peer, Role};
 use novadesign_engine::live::LiveChange;
 
@@ -290,88 +290,38 @@ pub fn window(app: &mut DesignApp, ctx: &Context) {
         return;
     }
     let mut open = true;
-    let mut action: Option<&'static str> = None;
-    egui::Window::new("Compartilhar arquivo").open(&mut open).collapsible(false).resizable(false).default_width(400.0).show(ctx, |ui| {
-        nova_account_ui::account_panel(ui, APP);
-        ui.separator();
-        ui.add_space(6.0);
-        if let Some(live) = app.live.live.as_ref() {
-            let host = live.role() == Role::Host;
-            ui.label(RichText::new(if host { "Você está compartilhando este documento." } else { "Você está em um documento compartilhado." }).strong());
-            ui.add_space(6.0);
-            if host {
-                let link = live.invite().to_share_link();
-                ui.label("Envie este convite para quem vai editar junto. Ele vale só para este documento; quem não tiver o Nova Design instala pelo Nova Foods Launcher.");
-                ui.add_space(4.0);
-                let mut shown = link.clone();
-                ui.add(egui::TextEdit::singleline(&mut shown).desired_width(f32::INFINITY));
-                if live.peers().is_empty() { ui.spinner(); ui.label("Conectando à colaboração…"); }
-                if ui.add_enabled(!live.peers().is_empty(), egui::Button::new("Copiar convite")).clicked() {
-                    ui.ctx().copy_text(link);
-                    action = Some("copied");
-                }
-                if ui.add_enabled(!live.peers().is_empty(), egui::Button::new("Gerar convite novo")).on_hover_text("O convite anterior deixa de funcionar; quem já entrou continua").clicked() {
-                    action = Some("renew");
-                }
-            }
-            ui.add_space(8.0);
-            ui.label(RichText::new(format!("Participantes agora ({})", app.live.peers.len())).strong());
-            for p in &app.live.peers {
-                ui.horizontal(|ui| {
-                    nova_account_ui::avatar(ui, p.user_id.as_deref(), &p.name, 32.0);
-                    ui.vertical(|ui| { ui.label(RichText::new(&p.name).strong()); ui.small(if p.host { "Anfitrião" } else { "Editando com você" }); });
-                });
-                ui.add_space(5.0);
-            }
-            ui.add_space(8.0);
-            if host {
-                ui.horizontal(|ui| {
-                    if ui.button("Encerrar para todos").on_hover_text("Fecha a sessão de todo mundo").clicked() {
-                        action = Some("end");
-                    }
-                    if ui.button("Sair (a sessão continua)").on_hover_text("Quem está aqui segue editando; a pessoa que entrou primeiro passa a coordenar").clicked() {
-                        action = Some("stop");
-                    }
-                });
-            } else if ui.button("Sair").clicked() {
-                action = Some("stop");
-            }
-        } else {
-            ui.label("Edite este documento ao vivo com outras pessoas.");
-            ui.add_space(4.0);
-            if ui.add(egui::Button::new(RichText::new("Convidar pessoas").color(egui::Color32::WHITE)).fill(egui::Color32::from_rgb(0, 109, 255)).corner_radius(10).min_size(egui::vec2(170.0, 36.0))).clicked() {
-                action = Some("host");
-            }
-            ui.separator();
-            ui.label("Recebeu um convite? Cole aqui:");
-            ui.add(egui::TextEdit::singleline(&mut app.live.invite_text).hint_text("https://workflowind.agcunae.com/apps/join#invite=…").desired_width(f32::INFINITY));
-            if ui.button("Entrar").clicked() {
-                action = Some("join");
-            }
-        }
-        if let Some(e) = &app.live.error {
-            ui.add_space(6.0);
-            ui.colored_label(egui::Color32::from_rgb(0xd6, 0x28, 0x39), e);
-        }
+    let media = app.live.live.as_ref().map_or_else(Vec::new, |live| {
+        let _ = live;
+        Vec::new()
     });
+    let view = nova_account_ui::ShareView {
+        app: APP,
+        this_doc: "este documento",
+        live: app.live.live.as_ref(),
+        peers: &app.live.peers,
+        invite_text: &mut app.live.invite_text,
+        notice: None,
+        error: app.live.error.as_deref(),
+        media,
+    };
+    let action = nova_account_ui::share_window(ctx, &mut open, view);
     if !open {
         app.live.open = false;
     }
     match action {
-        Some("host") => host(app),
-        Some("join") => {
+        Some(nova_account_ui::ShareAction::Host) => host(app),
+        Some(nova_account_ui::ShareAction::Join) => {
             let text = app.live.invite_text.clone();
             join(app, &text);
         }
-        Some("stop") => stop(app),
-        Some("end") => end_all(app),
-        Some("renew") => renew(app),
-        Some("copied") => toast(app, "Convite copiado"),
-        _ => {}
+        Some(nova_account_ui::ShareAction::Stop) => stop(app),
+        Some(nova_account_ui::ShareAction::EndAll) => end_all(app),
+        Some(nova_account_ui::ShareAction::Renew) => renew(app),
+        Some(nova_account_ui::ShareAction::Copied) => toast(app, "Convite copiado"),
+        None => {}
     }
 }
 
-/// Keep private invitation tokens out of file-open paths and their diagnostic logs.
 pub fn is_invite_arg(arg: &str) -> bool {
     arg == "--join" || nova_live::Invite::parse(arg).is_ok()
 }
@@ -400,6 +350,10 @@ pub fn control(app: &mut DesignApp, method: &str, p: &serde_json::Value) -> Opti
         "live.stop" => stop(app),
         "live.end" => end_all(app),
         "live.renew" => renew(app),
+        "live.open" => {
+            app.live.open = p.get("open").and_then(serde_json::Value::as_bool).unwrap_or(true);
+            return Some(Ok(live_status(app)));
+        }
         "live.status" => return Some(Ok(live_status(app))),
         _ => return None,
     }
