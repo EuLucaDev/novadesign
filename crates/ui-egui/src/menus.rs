@@ -201,7 +201,12 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("window.newWorkspace", "New Workspace…", None, "{name} — saves the current bars and panel arrangement"),
     ("window.deleteWorkspace", "Delete Workspace…", None, "{name}"),
     ("window.resetWorkspace", "Reset Workspace", None, "{} — back to the current workspace as saved (or its defaults)"),
-    ("window.brightness", "Interface Color Theme", None, "{brightness: dark|mediumDark|mediumLight|light|highContrast}"),
+    (
+        "window.brightness",
+        "Interface Color Theme",
+        None,
+        "{brightness: dark|mediumDark|mediumLight|light|highContrast|<suite theme id: pro, proMedium, proLightGray, proLight, studio, studioLight, classic, solarizedDark, adwaita, adwaitaDark, breezeLight, breezeDark, softDark, softLight>}",
+    ),
 ];
 
 /// Menu bar: (menu, entries). Entries: `cmd:<id>`, `ui:<id>`, `-` separator, `>Submenu` … `<`.
@@ -1764,7 +1769,7 @@ fn parse_entries(entries: &[&str]) -> Vec<Item> {
                 .collect();
             out.push(Item::Sub("Panels".into(), items));
         } else if e == "ui:window.brightness" {
-            let items = crate::theme::Brightness::ALL
+            let items = crate::theme::Brightness::menu()
                 .iter()
                 .map(|b| Item::Cmd {
                     label: b.label().to_string(),

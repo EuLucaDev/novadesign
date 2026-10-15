@@ -14,10 +14,17 @@ pub enum Brightness {
     Light,
     /// Accessibility: black chrome, white text, yellow selection and focus.
     HighContrast,
+    /// One of the Nova Foods suite themes (Nova Photo's fourteen, from `nova-themes`).
+    Suite(nova_themes::ThemeKind),
 }
 
 impl Brightness {
     pub const ALL: [Brightness; 5] = [Brightness::Dark, Brightness::MediumDark, Brightness::MediumLight, Brightness::Light, Brightness::HighContrast];
+
+    /// Every choice Window › Interface Color Theme offers: the five above, then the suite themes.
+    pub fn menu() -> Vec<Brightness> {
+        Brightness::ALL.into_iter().chain(nova_themes::ThemeKind::ALL.into_iter().map(Brightness::Suite)).collect()
+    }
     pub fn label(self) -> &'static str {
         match self {
             Brightness::Dark => "Dark",
@@ -25,6 +32,7 @@ impl Brightness {
             Brightness::MediumLight => "Medium Light",
             Brightness::Light => "Light",
             Brightness::HighContrast => "High Contrast",
+            Brightness::Suite(kind) => kind.label(),
         }
     }
     pub fn id(self) -> &'static str {
@@ -34,10 +42,14 @@ impl Brightness {
             Brightness::MediumLight => "mediumLight",
             Brightness::Light => "light",
             Brightness::HighContrast => "highContrast",
+            Brightness::Suite(kind) => kind.id(),
         }
     }
     pub fn parse(s: &str) -> Option<Self> {
-        Self::ALL.into_iter().find(|b| b.id().eq_ignore_ascii_case(s) || b.label().eq_ignore_ascii_case(s))
+        Self::ALL
+            .into_iter()
+            .find(|b| b.id().eq_ignore_ascii_case(s) || b.label().eq_ignore_ascii_case(s))
+            .or_else(|| nova_themes::ThemeKind::from_name(s).map(Brightness::Suite))
     }
 }
 
@@ -127,6 +139,7 @@ impl Tokens {
             measure_text: Color32::WHITE,
         };
         match b {
+            Brightness::Suite(kind) => Tokens::for_suite(kind),
             Brightness::Dark => dark,
             // Measured from InDesign 2026 (plan/indesign/11-observed-ui.md §1).
             Brightness::MediumDark => Tokens {
@@ -251,6 +264,54 @@ impl Tokens {
             },
         }
     }
+}
+
+impl Tokens {
+    /// A suite theme paints the chrome (bars, panels, fields, text, accent, tabs); the page,
+    /// smart guides and measurement labels keep Nova Design's own colours.
+    pub fn for_suite(kind: nova_themes::ThemeKind) -> Self {
+        let p = kind.palette();
+        let dark = kind.is_dark();
+        let base = Tokens::for_brightness(if dark { Brightness::Dark } else { Brightness::Light });
+        let strong = if dark { [255, 255, 255, 255] } else { [0, 0, 0, 255] };
+        Tokens {
+            dark,
+            app_bar: rgba(p.chrome),
+            panel: rgba(p.card),
+            panel_darker: rgba(p.dock),
+            input: rgba(p.field),
+            input_border: rgba(p.field_border),
+            divider: rgba(p.separator),
+            text: rgba(p.text),
+            text_strong: rgba(nova_themes::mix(p.text, strong, 0.5)),
+            text_dim: rgba(p.text_dim),
+            text_disabled: rgba(p.text_faint),
+            icon: rgba(p.icon),
+            hover: rgba(p.hover),
+            tool_active: rgba(p.pressed),
+            accent: rgba(p.accent),
+            accent_strong: rgba(nova_themes::mix(p.accent, [0, 0, 0, 255], 0.15)),
+            row_selected: rgba(p.row_selected),
+            pasteboard: rgba(p.canvas),
+            ruler: rgba(p.card),
+            ruler_tick: rgba(p.text_dim),
+            tab_inactive: rgba(p.dock),
+            button: rgba(p.card),
+            radius: p.radius_sm.clamp(0.0, 12.0) as u8,
+            border: rgba(p.card_border),
+            field_border: rgba(p.field_border),
+            well: rgba(p.pressed),
+            well_rim: rgba(p.field_border),
+            ruler_text: rgba(p.text),
+            section_divider: rgba(p.separator),
+            tab_strip: rgba(p.tab_strip),
+            ..base
+        }
+    }
+}
+
+fn rgba(c: nova_themes::Rgba) -> Color32 {
+    Color32::from_rgba_unmultiplied(c[0], c[1], c[2], c[3])
 }
 
 /// Install the UI fonts for the interface language `lang` (it orders the CJK fallbacks).
