@@ -1,0 +1,36 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+exclude = ["vendor/krilla"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+rust-version = "1.95"
+repository = "https://github.com/EuLucaDev/novafoods-libs"
+
+[workspace.dependencies]
+# internal: add each crate here as `craft-<name> = { path = "crates/<name>" }`
+craft-pdf = { path = "crates/pdf", version = "=0.1.0" }
+krilla = "=0.8.2"
+thiserror = "2"
+nova-atomic = { path = "crates/atomic" }
+nova-cms = { path = "crates/cms" }
+nova-print = { path = "crates/print" }
+nova-quit = { path = "crates/quit" }
+nova-settings = { path = "crates/settings" }
+nova-ui = { path = "crates/ui" }
+egui = { version = "0.36", default-features = false }
+rayon = "1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(craft_pdf_unicode_fixtures)"] }
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"
+
+[patch.crates-io]
+krilla = { path = "vendor/krilla" }

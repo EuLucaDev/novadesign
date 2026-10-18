@@ -10,4 +10,5 @@ Terminal=false
 StartupNotify=true
 StartupWMClass=br.com.novafoods.novadesign
 Categories=Graphics;Publishing;
+MimeType=application/x-novadesign;application/vnd.adobe.indesign-idml-package;
 Keywords=layout;page;desktop publishing;dtp;magazine;book;indesign;idml;typesetting;

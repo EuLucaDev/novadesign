@@ -5,7 +5,7 @@
 .DESCRIPTION
   Produces, in $env:DIST (default: dist/release):
     novadesign-<version>-windows-<arch>.msi            per-machine installer (WiX v5)
-    novadesign-<version>-windows-<arch>-portable.zip   novadesign.exe + novadesign-cli.exe
+    novadesign-<version>-windows-<arch>-portable.zip   novadesign.exe + novadesign-cli.exe + portable.txt
 
   The binaries link the C runtime statically (+crt-static), so neither the MSI nor the portable
   zip needs the Visual C++ redistributable. Signing is delegated to sign.ps1 (skipped with a
@@ -93,7 +93,7 @@ Copy-Item (Join-Path $Bin 'novadesign.exe'), (Join-Path $Bin 'novadesign-cli.exe
 # ---- MSI ---------------------------------------------------------------------------------------
 $Msi = Join-Path $Dist "novadesign-$Version-windows-$Arch.msi"
 Invoke-Native 'wix build' {
-  wix build (Join-Path $PSScriptRoot 'novadesign.wxs') -arch $Arch `
+  wix build (Join-Path $PSScriptRoot 'novadesign.wxs') (Join-Path $PSScriptRoot 'installer-ui.wxs') -arch $Arch `
     -d "Version=$MsiVersion" -d "BinDir=$Stage" -d "IconPath=$(Join-Path $Root 'assets\app-icon\novadesign.ico')" `
     -o $Msi
 }
@@ -106,6 +106,12 @@ $Portable = Join-Path $TargetDir "windows-package\novadesign-$Version-windows-$A
 Remove-Item -Recurse -Force $Portable -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force -Path $Portable | Out-Null
 Copy-Item (Join-Path $Stage '*.exe') $Portable
+# The marker that makes NovaDesign keep its data in .\NovaDesignData next to the exe instead of
+# %APPDATA% (#574; see apps/novadesign/src/profile.rs).
+Set-Content -Encoding ascii -Path (Join-Path $Portable 'portable.txt') -Value @(
+  'NovaDesign portable: preferences, logs and crash recovery are kept in the NovaDesignData folder',
+  'next to novadesign.exe. Delete this file to use %APPDATA%\NovaDesign instead.'
+)
 foreach ($f in 'README.md', 'LICENSE', 'LICENSE-MIT', 'LICENSE-APACHE', 'NOTICE') {
   $p = Join-Path $Root $f
   if (Test-Path $p) { Copy-Item $p $Portable }

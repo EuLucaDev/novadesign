@@ -1,0 +1,25 @@
+[package]
+name = "novadesign-pptx"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "NovaDesign PowerPoint (PPTX) export: pages as slides of editable shapes, pictures and text"
+
+[lints]
+workspace = true
+
+[dependencies]
+novadesign-geom = { workspace = true }
+novadesign-color = { workspace = true }
+novadesign-doc = { workspace = true }
+novadesign-fonts = { workspace = true }
+novadesign-compose = { workspace = true }
+novadesign-images = { workspace = true }
+skrifa = { workspace = true }
+image = { workspace = true }
+thiserror = { workspace = true }
+zip = { workspace = true }
+
+[dev-dependencies]
+novadesign-fonts = { workspace = true, features = ["testing"] }
+quick-xml = { workspace = true }

@@ -1,3 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Installed as share/mime/packages/br.com.novafoods.novadesign.xml (package.sh, the Flatpak
+     manifests). Both formats are zip files, so they are matched by extension: zip magic would
+     claim every archive. -->
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-novadesign">
+    <comment>Nova Design document</comment>
+    <sub-class-of type="application/zip"/>
+    <generic-icon name="br.com.novafoods.novadesign"/>
+    <glob pattern="*.novadesign"/>
+  </mime-type>
+  <mime-type type="application/vnd.adobe.indesign-idml-package">
+    <comment>IDML document</comment>
+    <sub-class-of type="application/zip"/>
+    <glob pattern="*.idml"/>
+  </mime-type>
 </mime-info>

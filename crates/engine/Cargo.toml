@@ -10,6 +10,7 @@ workspace = true
 
 [dependencies]
 nova-print = { workspace = true }
+craft-docpath = { workspace = true }
 novadesign-images = { workspace = true }
 novadesign-geom = { workspace = true }
 novadesign-color = { workspace = true }
@@ -19,21 +20,26 @@ novadesign-compose = { workspace = true }
 novadesign-render = { workspace = true }
 novadesign-format = { workspace = true }
 novadesign-epub = { workspace = true }
+novadesign-pptx = { workspace = true }
 novadesign-textimport = { workspace = true }
 novadesign-pdf = { workspace = true }
 novadesign-tools = { workspace = true }
 novadesign-idml = { workspace = true }
+indd = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
 log = { workspace = true }
-regex = { workspace = true }
 quick-xml = { workspace = true }
 caseless = { workspace = true }
 unicode-segmentation = { workspace = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+nova-atomic = { workspace = true }
 tempfile = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
+same-file = { workspace = true }
 
 [dev-dependencies]
 novadesign-fonts = { workspace = true, features = ["testing"] }

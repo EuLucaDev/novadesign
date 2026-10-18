@@ -2,11 +2,11 @@
 <!--
   NovaDesign MSI (WiX Toolset v5: `dotnet tool install -g wix`). Built by package.ps1:
 
-    wix build novadesign.wxs -arch x64 -d Version=1.2.3 -d BinDir=... -d IconPath=... -o out.msi
+    wix build novadesign.wxs installer-ui.wxs -arch x64 -d Version=1.2.3 -d BinDir=... -d IconPath=... -o out.msi
 
-  Per-machine install into Program Files, a Start Menu shortcut, `.pcraft` owned by NovaDesign,
-  and NovaDesign offered under "Open with" for PSD/PSB and the image formats it reads (without
-  taking over the user's default app for them).
+  Per-machine install into Program Files, a Start Menu shortcut, `.novadesign` owned by
+  NovaDesign, and NovaDesign offered under "Open with" for IDML (without taking over the user's
+  default app for it).
 -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
@@ -30,6 +30,8 @@
     <Property Id="ARPURLUPDATEINFO" Value="https://workflowind.agcunae.com/apps/novadesign" />
     <Property Id="ARPHELPLINK" Value="https://workflowind.agcunae.com/inbox" />
 
+    <!-- Shared native setup UI, including install/uninstall completion. -->
+
     <StandardDirectory Id="ProgramFiles6432Folder">
       <Directory Id="INSTALLFOLDER" Name="NovaDesign" />
     </StandardDirectory>
@@ -37,7 +39,10 @@
 
     <Feature Id="Main" Title="NovaDesign" Level="1">
       <ComponentGroupRef Id="NovadesignFiles" />
+      <ComponentGroupRef Id="CraftInstallerSettings" />
     </Feature>
+    <!-- Shared full UI; app installation policy remains below. -->
+    <UIRef Id="CraftInstallerUI" />
   </Package>
 
   <Fragment>
@@ -49,6 +54,22 @@
               Icon="NovadesignIcon.ico" IconIndex="0" />
         </File>
 
+        <!-- .novadesign: NovaDesign's own format; NovaDesign is its default app. -->
+        <ProgId Id="Novadesign.Document" Description="NovaDesign Document" Icon="NovadesignExe" IconIndex="0">
+          <Extension Id="novadesign" ContentType="application/x-novadesign">
+            <Verb Id="open" Command="Open" TargetFile="NovadesignExe" Argument="&quot;%1&quot;" />
+          </Extension>
+        </ProgId>
+        <!-- IDML: offered under "Open with", never forced as the default. -->
+        <ProgId Id="Novadesign.Idml" Description="IDML Document" Icon="NovadesignExe" IconIndex="0" />
+        <RegistryValue Root="HKLM" Key="Software\Classes\Novadesign.Idml\shell\open\command" Value="&quot;[#NovadesignExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKLM" Key="Software\Classes\.idml\OpenWithProgids" Name="Novadesign.Idml" Value="" Type="string" />
+
+        <!-- "Open with" app list and the Run dialog (Win+R "novadesign"). -->
+        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\novadesign.exe" Name="FriendlyAppName" Value="NovaDesign" Type="string" />
+        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\novadesign.exe\shell\open\command" Value="&quot;[#NovadesignExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\novadesign.exe\SupportedTypes" Name=".novadesign" Value="" Type="string" />
+        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\novadesign.exe\SupportedTypes" Name=".idml" Value="" Type="string" />
         <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\novadesign.exe" Value="[#NovadesignExe]" Type="string" />
       </Component>
 

@@ -58,7 +58,7 @@ fn print_with(
         ..nova_print::Job::default()
     };
     let dry = p.get("dryRun").and_then(Value::as_bool).unwrap_or(false);
-    let pdf = novadesign_pdf::export_pdf(d, &s.cache, &opts).map_err(|e| EngineError::Other(e.to_string()))?;
+    let pdf = novadesign_pdf::export_pdf(&super::interchange::with_pdf_boxes(d), &s.cache, &opts).map_err(|e| EngineError::Other(e.to_string()))?;
     let command = nova_print::command_preview(&job).map_err(|e| bad("file.print", e.to_string()))?;
     let pages = opts.pages.as_ref().map_or(d.page_count(), |v| v.len());
     let out = json!({"printer": job.printer, "copies": copies, "pages": pages, "command": command, "bytes": pdf.len()});
@@ -99,7 +99,7 @@ mod tests {
         let expected = {
             let d = &s.doc().unwrap().doc;
             let options = super::super::export::options(&params, d.page_count()).unwrap();
-            novadesign_pdf::export_pdf(d, &s.cache, &options).unwrap()
+            novadesign_pdf::export_pdf(&super::super::interchange::with_pdf_boxes(d), &s.cache, &options).unwrap()
         };
         let r = print_with(&mut s, &params, |pdf, job| {
             // The production export options and full bytes reach the shared spooler boundary.

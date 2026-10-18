@@ -14,7 +14,7 @@ novadesign-color = { workspace = true }
 novadesign-doc = { workspace = true }
 novadesign-fonts = { workspace = true }
 novadesign-compose = { workspace = true }
-krilla = { workspace = true }
+craft-pdf = { workspace = true, features = ["write-pdf"] }
 krilla-svg = { workspace = true }
 novadesign-images = { workspace = true }
 image = { workspace = true }

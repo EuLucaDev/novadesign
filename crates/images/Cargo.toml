@@ -14,6 +14,10 @@ novadesign-fonts = { workspace = true }
 image = { workspace = true }
 tiff = { workspace = true }
 resvg = { workspace = true }
+log = { workspace = true }
+nova-cms = { workspace = true }
+zune-core = { version = "0.5", default-features = false }
+zune-jpeg = "0.5"
 
 [dev-dependencies]
 novadesign-fonts = { workspace = true, features = ["testing"] }

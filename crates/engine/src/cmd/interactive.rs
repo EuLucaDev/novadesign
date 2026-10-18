@@ -51,7 +51,7 @@ pub fn specs() -> Vec<CommandSpec> {
                     novadesign_doc::Selection::text(novadesign_doc::TextSel { story, anchor: start, focus: end, frame, cell: None })
                 }
             };
-            st.revision += 1;
+            st.bump_revision();
             Ok(Value::Null)
         }),
         cmd!("bookmark.rename", "Rename Bookmark", [], None, "{index, name}", has_doc, |s, p| {

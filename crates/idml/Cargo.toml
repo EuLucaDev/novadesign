@@ -12,7 +12,9 @@ workspace = true
 novadesign-geom = { workspace = true }
 novadesign-color = { workspace = true }
 novadesign-doc = { workspace = true }
+novadesign-images = { workspace = true }
 thiserror = { workspace = true }
+log = { workspace = true }
 quick-xml = { workspace = true }
 zip = { workspace = true }
 
