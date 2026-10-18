@@ -223,9 +223,6 @@
         <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\Craft.novadesign"
             Name="NoModify" Type="integer" Value="1" KeyPath="yes" />
       </Component>
-      <Component Id="NovaFoodsLegalNotice">
-        <File Id="NovaFoodsLegalNoticeFile" Source="$(sys.SOURCEFILEDIR)..\..\NOTICE" KeyPath="yes" />
-      </Component>
     </ComponentGroup>
   </Fragment>
 
